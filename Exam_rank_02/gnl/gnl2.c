@@ -25,7 +25,7 @@ char    *ft_strdup(char *s)
    return (cpy);
 }
           
-char    *ft_addsym(char *s, char *c)
+char   *ft_addsym(char *s, char *c)
 {
     char    *new;
     int     i = 0;
@@ -39,19 +39,6 @@ char    *ft_addsym(char *s, char *c)
     return (new);
 }
 
-int    ft_getline(char **str, char **line, int bytes)
-{
-    if (bytes == 0)
-    {
-        *line = ft_strdup(*str);
-        free(*str);
-        *str = NULL;
-    }
-    if (bytes < 0)
-        return (-1);
-    return (bytes ? 1 : 0);
-}
-
 int     gnl(char **line, int fd)
 {
     char            buf[1];
@@ -61,7 +48,7 @@ int     gnl(char **line, int fd)
     
     while ((bytes = read(fd, buf, 1) > 0))
     {
-        if (*buf && *buf != '\n')
+        if (*buf != '\n')
         {
             tmp = str;
             str = ft_addsym(str, buf);
@@ -75,7 +62,15 @@ int     gnl(char **line, int fd)
             break ;    
         }
     }
-    return (ft_getline(&str, line, bytes));
+    if (bytes == 0)
+    {
+        *line = ft_strdup(str);
+        free(str);
+        str = NULL;
+    }
+    if (bytes < 0)
+        return (-1);
+    return (bytes ? 1 : 0);
 }
 
 #include <stdio.h>
@@ -85,17 +80,17 @@ int     main(void)
 {
     int fd = 0;
     char *line = NULL;
-//    int i = 0;
+    int i = 0;
     
-    gnl(&line, fd);
-    printf("%s\n", line);
-    // fd = open("test.txt", O_RDONLY);
-    // while (i < 3)
-    // {
-    //     gnl(&line, fd);
-    //     printf("%s\n", line);
-    //     free(line);
-    //     i++;
-    // }
+    // gnl(&line, fd);
+    // printf("%s\n", line);
+    fd = open("test.txt", O_RDONLY);
+    while (i < 10)
+    {
+        gnl(&line, fd);
+        printf("%s\n", line);
+        free(line);
+        i++;
+    }
     return (0);
 }

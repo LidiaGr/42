@@ -5,12 +5,12 @@
 int     main(void)
 {
     // int fd = 0;
-	// char *line == NULL;
+	// char *line = NULL;
 	// // int i;
 
 	// // i = 0;
 
-	// get_next_line(&line, fd);
+	// ft_gnl(&line, fd);
 	// printf("%s\n", line);
 
     int fd;
