@@ -1,4 +1,4 @@
-#include "gnl2.h"
+#include "gnl.h"
 
 int     ft_strlen(char *s)
 {
@@ -11,9 +11,9 @@ int     ft_strlen(char *s)
 
 char    *ft_strdup(char *s)
 {
-   char *cpy;
-   int i = 0;
-
+    char *cpy;
+    int i = 0;
+    
     if (!(cpy = (char *)malloc(sizeof(char) * ft_strlen(s) + 1)))
         return (NULL);
     while (s && s[i])
@@ -21,74 +21,66 @@ char    *ft_strdup(char *s)
         cpy[i] = s[i];
         i++;
     }
-   cpy[i] = '\0';
-   return (cpy);
-}
-          
-char   *ft_addsym(char *s, char *c)
-{
-    char    *new;
-    int     i = 0;
-    
-    if(!(new = (char *)malloc(sizeof(char) * ft_strlen(s) + 2)))
-        return (NULL);
-    while (s && *s)
-        new[i++] = *s++;
-    new[i++] = c[0];
-    new[i] = '\0';
-    return (new);
+    cpy[i] = '\0';
+    return (cpy);
 }
 
-int     gnl(char **line, int fd)
+char    *add_sym(char *s, char *c)
 {
-    char            buf[1];
-    static char     *str;
-    ssize_t         bytes;
-    char            *tmp;
+   char *cpy;
+   int i = 0;
+   
+   if (!(cpy = (char *)malloc(sizeof(char) * ft_strlen(s) + 2)))
+       return (NULL);
+   while (s && s[i])
+   {
+       cpy[i] = s[i];
+       i++;
+   }
+    cpy[i++] = c[0];
+    cpy[i] = '\0';
+   return (cpy);
+}
+
+int     get_next_line(char **line, int fd)
+{
+    char    buf[1];
+    ssize_t bytes;
+    static char    *str;
+    char    *tmp;
     
-    while ((bytes = read(fd, buf, 1) > 0))
+    while ((bytes = read(fd, buf, 1)) > 0)
     {
-        if (*buf != '\n')
+        if (buf[0] != '\n')
         {
             tmp = str;
-            str = ft_addsym(str, buf);
+            str = add_sym(str, buf);
             free(tmp);
         }
         else
-        {
-            *line = ft_strdup(str);
-            free(str);
-            str = NULL;
-            break ;    
-        }
+            break ;
     }
-    if (bytes == 0)
-    {
-        *line = ft_strdup(str);
-        free(str);
-        str = NULL;
-    }
+    *line = ft_strdup(str);
+    free(str);
+    str = NULL;
     if (bytes < 0)
         return (-1);
     return (bytes ? 1 : 0);
 }
 
-#include <stdio.h>
 #include <fcntl.h>
-
-int     main(void)
+#include <stdio.h>
+int main(void)
 {
     int fd = 0;
     char *line = NULL;
     int i = 0;
     
-    // gnl(&line, fd);
-    // printf("%s\n", line);
-    fd = open("test.txt", O_RDONLY);
+    fd = open("./text.txt", O_RDONLY);
     while (i < 10)
     {
-        gnl(&line, fd);
-        printf("%s\n", line);
+        get_next_line(&line, fd);
+        printf("%s \n", line);
         free(line);
         i++;
     }
