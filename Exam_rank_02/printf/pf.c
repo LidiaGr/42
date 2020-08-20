@@ -124,6 +124,8 @@ void	process_s(t_list *list)
 
 	list->i++;
 	str = va_arg(list->arg, char *);
+        if (!str)
+                str = "(null)";
 	list->len = ft_strlen(str);
 	if (list->have_prec && list->prec < list->len)
 		list->len = list->prec;
@@ -146,11 +148,11 @@ void	process_d(t_list *list)
 	list->len = num_len(num, 10);
 	if (num == 0 && list->have_prec)
 		list->len = 0;
-	if (list->negativ)
-		list->len++;
 	if (list->have_prec && list->prec > list->len)
 		list->zero_count = list->prec - list->len;
-	print_x_char(' ', list->width - (list->len + list->zero_count), &list);
+	if (list->negativ)
+		list->len++;
+        print_x_char(' ', list->width - (list->len + list->zero_count), &list);
 	if (list->negativ)
 		ft_putchar('-');
 	print_x_char('0', list->zero_count, &list);
