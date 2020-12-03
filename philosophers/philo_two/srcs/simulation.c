@@ -90,7 +90,7 @@ void	*ft_simulation(void *args)
 		ft_sleep(tmp->time_eat);
 		sem_post(tmp->table.forks);
 		sem_post(tmp->table.forks);
-		if (tmp->philo->eat_count++ && tmp->philo->eat_count == tmp->num_eat)
+		if (++tmp->philo->eat_count && tmp->philo->eat_count == tmp->num_eat)
 			break ;
 		ft_action(tmp, " is sleeping\n", tmp->philo->start_sim, 0);
 		ft_sleep(tmp->time_sleep);

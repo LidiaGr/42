@@ -96,7 +96,7 @@ void	*ft_simulation(void *args)
 		ft_sleep(tmp->time_eat);
 		pthread_mutex_unlock(&tmp->table.forks[tmp->philo->right_fork]);
 		pthread_mutex_unlock(&tmp->table.forks[tmp->philo->left_fork]);
-		if (tmp->philo->eat_count++ && tmp->philo->eat_count == tmp->num_eat)
+		if (++tmp->philo->eat_count && tmp->philo->eat_count == tmp->num_eat)
 			break ;
 		ft_action(tmp, " is sleeping\n", tmp->philo->start_sim, 0);
 		ft_sleep(tmp->time_sleep);
