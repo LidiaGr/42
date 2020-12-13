@@ -68,6 +68,8 @@ void	*check_death(void *args)
 		g_death = 1;
 	ft_action(input, "\033[31m is dead\033[0m\n", input->philo->start_sim, 1);
 	sem_post(input->table.dead);
+    sem_post(input->table.forks);
+    sem_post(input->table.forks);
 	return (NULL);
 }
 

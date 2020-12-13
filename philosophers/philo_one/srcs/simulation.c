@@ -74,6 +74,8 @@ void	*check_death(void *args)
 	if (input->num_eat == input->philo->eat_count)
 		g_death = 1;
 	ft_action(input, "\033[31m is dead\033[0m\n", input->philo->start_sim, 1);
+    pthread_mutex_unlock(&input->table.forks[input->philo->right_fork]);
+    pthread_mutex_unlock(&input->table.forks[input->philo->left_fork]);
 	return (NULL);
 }
 
