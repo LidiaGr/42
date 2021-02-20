@@ -1,3 +1,12 @@
+# ft_server
+Basics of system and network administration. The aim is to install a complete web server, using a deployment technology named Docker.
+
+# Objectives
+
+- Network & system administration
+- Docker
+
+# Usage
 # To create image: 
         docker build -t ft_server .
 

@@ -1,5 +1,13 @@
-HOW TO:
+# ft_services
+This project consist to clusturing an docker-compose application and deploy it with Kubernetes.
 
+# Objectives
+
+- Network & system administration
+- Docker
+- Kubernetes
+
+# Usage
 # Create a pod from a YAML file
 kubectl create -f <yourfile.yaml>
 
