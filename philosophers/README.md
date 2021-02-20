@@ -1,4 +1,4 @@
-# Philosophers
+# PHILOSOPHERS
 In this project, I learned the basics of threading a process and how to work on the same memory space. 
 
 # Objectives

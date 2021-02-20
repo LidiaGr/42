@@ -1,4 +1,4 @@
-# ft_printf
+# FT_PRINTF
 The aim of the project is to recode printf. I learned how to use variadic arguments.
 
 # Objectives

@@ -1,4 +1,4 @@
-# ft_services
+# FT_SERVICES
 This project consist to clusturing an docker-compose application and deploy it with Kubernetes.
 
 # Objectives

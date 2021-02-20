@@ -1,4 +1,4 @@
-# ft_server
+# FT_SERVER
 Basics of system and network administration. The aim is to install a complete web server, using a deployment technology named Docker.
 
 # Objectives
